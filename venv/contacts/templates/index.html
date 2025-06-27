@@ -1,0 +1,45 @@
+
+{% extends 'base.html' %}
+{% block content %}
+            <table id="myTable" class="display">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th width="200">Name</th>
+                        <th width="300">Address</th>
+                        <th>Phone</th>
+                        <th>Email</th>
+                        <th>Type</th>
+                        <th>Edit</th>
+                        <th>DELETE</th>
+
+                    
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for contact in contacts.all %}
+                    <tr>
+                        <td>{{ contact.id }}</td>                     
+                        <td>{{ contact.name }}</td>
+                        <td>{{ contact.address }}</td>
+                        <td>{{ contact.phone }}</td>
+                        <td>{{ contact.email }}</td>
+                        <td>{{ contact.contact_type }}</td>
+                        <td><a  href = "{% url 'edit' contact.id %}" class="btn btn-info">Edit </a></td>
+                        <td><a href="{% url 'delete' contact.id %}" class="btn btn-danger">Delete </a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <script>
+                $(document).ready(function() {
+                    $('#myTable').DataTable({
+                        "pageLength": 10,
+                        "ordering": true,
+                        "searching": true,
+                        "responsive": true
+                    });
+                });
+            </script>
+
+    {% endblock %}
